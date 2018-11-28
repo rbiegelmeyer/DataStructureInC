@@ -17,23 +17,12 @@ int push(int new)
 
 int pop(void)
 {
-    if (top == 0)
+    if (!top)
     {
         printf("Pilha vazia.\n");
         return 0;
     }
     top--;
-    return stack[top];
-}
-
-int pop(void)
-{
-    top--;
-    if (top <= 0)
-    {
-        printf("Pilha vazia.\n");
-        return 0;
-    }
     return stack[top];
 }
 
@@ -58,8 +47,8 @@ int main(int argc, char const *argv[])
     pop();
     pop();
     pop();
-    push(16);
     printf("%d\n", top);
+    push(16);
     showStack();
 
     return 0;
