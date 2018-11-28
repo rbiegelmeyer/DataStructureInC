@@ -1,38 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int inicio = 0;
-int fim = 0;
+int start = 0;
+int end = 0;
 
-int armazenar(int *fila, int novo, int tamanho)
+int enqueue(int *queue, int new, int size)
 {
-
-  if (fim == tamanho)
+  if (end == size)
   {
     printf("Fila cheia\n");
     return 0;
   }
-  fila[fim] = novo;
-  fim++;
+  queue[end] = new;
+  end++;
 }
 
-int remover(int *fila, int *re)
+int dequeue(int *queue, int *re)
 {
-  if (inicio == fim)
+  if (start == end)
   {
     printf("Fila vazia.\n");
     return -1;
   }
 
-  *re = fila[inicio];
-  inicio++;
+  *re = queue[start];
+  start++;
   return 0;
 }
 
-int imprimir(int *fila)
+int showQueue(int *queue)
 {
   int i;
-  if (inicio == fim)
+  if (start == end)
   {
     printf("Fila vazia\n");
     return -1;
@@ -40,8 +39,8 @@ int imprimir(int *fila)
   else
   {
     printf("\nFila:\n\n");
-    for (i = inicio; i < fim; i++)
-      printf("%d ", fila[i]);
+    for (i = start; i < end; i++)
+      printf("%d ", queue[i]);
 
     printf("\n");
   }
@@ -68,17 +67,17 @@ int main()
   {
     printf("\nDado: ");
     scanf("%d", &dado);
-    armazenar(fila, dado, n);
-    imprimir(fila);
+    enqueue(fila, dado, n);
+    showQueue(fila);
   }
 
-  ret = remover(fila, &rem);
+  ret = dequeue(fila, &rem);
 
   if (ret == 0)
   {
     printf("\nSaiu da fila: %d\n", rem);
   }
-  imprimir(fila);
+  showQueue(fila);
 
   printf("\nDeseja armazenar mais dados? pressione 0 para sair ou digite a quantidade adicional: ");
   scanf("%d", &nadic);
@@ -96,16 +95,16 @@ int main()
     {
       printf("\nDado: ");
       scanf("%d", &dado);
-      armazenar(nova, dado, (n + nadic));
-      imprimir(nova);
+      enqueue(nova, dado, (n + nadic));
+      showQueue(nova);
     }
 
-    ret = remover(nova, &rem);
+    ret = dequeue(nova, &rem);
 
     if (ret == 0)
     {
       printf("\nSaiu da fila: %d\n", rem);
     }
-    imprimir(nova);
+    showQueue(nova);
   }
 }
